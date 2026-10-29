@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Sign Up — ShareSphere{% endblock %}
+
+{% block content %}
+<div class="form-wrap">
+  <h2>Create your account</h2>
+
+  <form method="POST" action="{{ url_for('register') }}" class="form">
+    <label for="roleSelect">I am a</label>
+    <select name="role" id="roleSelect" required>
+      <option value="donor">Donor — I want to give</option>
+      <option value="ngo">NGO — I need items</option>
+    </select>
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required placeholder="Your name">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="you@example.com">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required placeholder="Create a password">
+
+    <!-- Extra fields shown only when NGO is selected -->
+    <div id="ngoFields" style="display:none;">
+      <label for="ngo_name">NGO Name</label>
+      <input type="text" id="ngo_name" name="ngo_name" placeholder="Your organization name">
+
+      <label for="cause">Cause</label>
+      <input type="text" id="cause" name="cause" placeholder="e.g. Education, Food, Clothing">
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="3" placeholder="What does your NGO do?"></textarea>
+    </div>
+
+    <button type="submit" class="btn-solid full">Sign Up</button>
+  </form>
+
+  <p class="switch">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</div>
+{% endblock %}

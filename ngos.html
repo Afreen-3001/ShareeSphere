@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Verified NGOs — ShareSphere{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Verified NGOs</h1>
+  <input type="text" id="searchBox" placeholder="Search by name or cause...">
+</section>
+
+<div class="card-grid" id="ngoGrid">
+  {% for ngo in ngos %}
+    <div class="card ngo-card"
+         data-name="{{ ngo['name']|lower }}"
+         data-cause="{{ ngo['cause']|lower }}">
+      <div class="badge">✓ Verified</div>
+      <h3>{{ ngo['name'] }}</h3>
+      <p class="cause">{{ ngo['cause'] }}</p>
+      <p>{{ ngo['description'] or 'Working to help those in need.' }}</p>
+      <a href="{{ url_for('donate', ngo_id=ngo['id']) }}" class="btn-solid small">Donate</a>
+    </div>
+  {% else %}
+    <p class="empty">No verified NGOs yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}ssss

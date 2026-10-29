@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ShareSphere — Give. Share. Care.{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M32 8c-6 0-11 5-11 11 0 2 .5 4 1.5 5.5L18 30c-1.5 2-1 4.5 1 5.5s4.5.5 5.5-1.5l3-4v6c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5v-6l3 4c1 2 3.5 2.5 5.5 1.5s2.5-3.5 1-5.5l-4.5-5.5c1-1.5 1.5-3.5 1.5-5.5 0-6-5-11-11-11z' fill='%232E8B74'/></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="logo">
+      <!-- Two-hands logo: one giving, one receiving -->
+      <svg viewBox="0 0 64 64" width="32" height="32" aria-hidden="true">
+        <!-- Giving hand (top) -->
+        <path d="M32 6c-6.6 0-12 5.4-12 12 0 2.3.6 4.4 1.8 6.2l-4.2 5.2c-1.6 2-1.1 4.9.9 6 2 1.1 4.9.6 6-1.4l2.5-3.4v6.4c0 2.8 2.2 5 5 5s5-2.2 5-5v-6.4l2.5 3.4c1.1 2 4 2.5 6 1.4 2-1.1 2.5-4 .9-6l-4.2-5.2c1.2-1.8 1.8-3.9 1.8-6.2 0-6.6-5.4-12-12-12z" fill="#2E8B74"/>
+        <!-- Receiving hand (bottom, cupped) -->
+        <path d="M12 42c0-2.2 2.2-3.9 4.4-3.3l6.2 2 4.2-3.2c2.2-1.7 5-.6 5 1.7 0 1.1-.5 2.2-1.6 2.8l-5.2 3h10.5c2.8 0 5 2.2 5 5s-2.2 5-5 5H23.5c-3.3 0-6.5-1.6-8.1-4.4L12 46c-1.1-1.6-1.1-3.4 0-4z" fill="#4CAF93"/>
+      </svg>
+      <span>ShareSphere</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="{{ url_for('ngo_list') }}">NGOs</a>
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        {% if session.get('role') == 'admin' %}
+          <a href="{{ url_for('admin') }}">Admin</a>
+        {% endif %}
+        <a href="{{ url_for('logout') }}" class="btn-outline">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}" class="btn-solid">Sign Up</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-wrap">
+        {% for cat, msg in messages %}
+          <div class="flash flash-{{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- PAGE CONTENT -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 ShareSphere — Connecting generosity with need.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — ShareSphere{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Dashboard</h1>
+  <p>Welcome, {{ session.get('name') }} ({{ role }})</p>
+</section>
+
+<!-- ================= DONOR VIEW ================= -->
+{% if role == 'donor' %}
+  <section>
+    <h2>My Donations</h2>
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>NGO</th><th>Type</th><th>Details</th><th>Status</th><th>Date</th>
+        </tr>
+        {% for d in data.donations %}
+          <tr>
+            <td>{{ d['ngo_name'] }}</td>
+            <td>{{ d['dtype'] }}</td>
+            <td>{{ d['detail'] }}</td>
+            <td><span class="pill">{{ d['status'] }}</span></td>
+            <td>{{ d['date'] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="empty">No donations yet.</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </section>
+
+<!-- ================= NGO VIEW ================= -->
+{% else %}
+  {% if data.ngo %}
+    <section>
+      <h2>{{ data.ngo['name'] }} —
+        {% if data.ngo['verified'] %}
+          <span class="pill">Verified ✓</span>
+        {% else %}
+          <span class="pill" style="background:#fdf3e0;color:#b7791f;">Pending verification</span>
+        {% endif %}
+      </h2>
+      <p class="cause">{{ data.ngo['cause'] }}</p>
+      <p>{{ data.ngo['description'] }}</p>
+    </section>
+
+    <section>
+      <h3>Add a Need</h3>
+      <form id="needForm" class="form inline-form">
+        <input type="text" name="item_type" id="item_type"
+               placeholder="Item type (e.g. blankets)" required>
+        <input type="text" name="description" id="need_desc"
+               placeholder="Description">
+        <button type="submit" class="btn-solid">Add</button>
+      </form>
+      <p id="needMsg" class="msg"></p>
+
+      <h3>Current Needs</h3>
+      <ul class="need-list">
+        {% for n in data.needs %}
+          <li><strong>{{ n['item_type'] }}</strong> — {{ n['description'] }}</li>
+        {% else %}
+          <li class="empty">No needs listed yet.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h3>Donations Received</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Donor</th><th>Type</th><th>Details</th><th>Date</th></tr>
+          {% for d in data.received %}
+            <tr>
+              <td>{{ d['donor_name'] }}</td>
+              <td>{{ d['dtype'] }}</td>
+              <td>{{ d['detail'] }}</td>
+              <td>{{ d['date'] }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="4" class="empty">No donations received yet.</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </section>
+
+  {% else %}
+    <section>
+      <p class="empty">No NGO profile found for this account.</p>
+    </section>
+  {% endif %}
+{% endif %}
+{% endblock %}

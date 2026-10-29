@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Admin — Verify NGOs — ShareSphere{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Admin — Verify NGOs</h1>
+  <p>Approve NGOs so donors can see and support them.</p>
+</section>
+
+<section>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>NGO</th><th>Cause</th><th>Status</th><th>Action</th>
+      </tr>
+      {% for ngo in ngos %}
+        <tr>
+          <td>{{ ngo['name'] }}</td>
+          <td>{{ ngo['cause'] }}</td>
+          <td>
+            {% if ngo['verified'] %}
+              <span class="pill">Verified ✓</span>
+            {% else %}
+              <span class="pill" style="background:#fdf3e0;color:#b7791f;">Pending</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if not ngo['verified'] %}
+              <button class="btn-solid small verify-btn" data-id="{{ ngo['id'] }}">Verify</button>
+            {% else %}
+              —
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="empty">No NGOs registered.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+</section>
+{% endblock %}

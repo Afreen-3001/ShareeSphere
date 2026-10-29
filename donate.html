@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Donate to {{ ngo['name'] }} — ShareSphere{% endblock %}
+
+{% block content %}
+<div class="form-wrap">
+  <h2>Donate to {{ ngo['name'] }}</h2>
+  <p class="cause">{{ ngo['cause'] }}</p>
+
+  <form id="donateForm" class="form" data-ngo="{{ ngo['id'] }}">
+    <label for="dtype">Donation Type</label>
+    <select name="dtype" id="dtype">
+      <option value="item">Item (clothes, books, electronics)</option>
+      <option value="money">Money (pledge)</option>
+    </select>
+
+    <label for="detail">Details</label>
+    <input type="text" name="detail" id="detail" required
+           placeholder="e.g. 5 winter jackets, or $50 pledge">
+
+    <button type="submit" class="btn-solid full">Confirm Donation</button>
+  </form>
+
+  <p id="donateMsg" class="msg"></p>
+</div>
+{% endblock %}

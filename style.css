@@ -1,0 +1,182 @@
+/* ============ VARIABLES ============ */
+:root{
+  --green:#2E8B74;
+  --green-light:#4CAF93;
+  --green-soft:#e3f4ed;
+  --bg:#f7faf8;
+  --text:#1d2b28;
+  --muted:#6b7d78;
+  --white:#ffffff;
+  --border:#e2ece8;
+  --radius:14px;
+  --shadow:0 8px 30px rgba(0,0,0,.04);
+}
+
+/* ============ RESET ============ */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+a{text-decoration:none;color:inherit;}
+main{min-height:60vh;}
+
+/* ============ NAVBAR ============ */
+.navbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 6%;background:var(--white);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:700;font-size:1.25rem;color:var(--green);
+}
+.nav-links{display:flex;align-items:center;gap:18px;font-weight:500;}
+.nav-links a{color:var(--text);transition:.2s;}
+.nav-links a:hover{color:var(--green);}
+
+/* ============ BUTTONS ============ */
+.btn-solid{
+  background:var(--green);color:#fff;padding:10px 20px;border-radius:10px;
+  border:none;cursor:pointer;font-weight:600;font-size:1rem;font-family:inherit;
+  transition:.2s;display:inline-block;
+}
+.btn-solid:hover{background:var(--green-light);transform:translateY(-1px);}
+.btn-solid.small{padding:8px 16px;font-size:.9rem;}
+.btn-solid.full{width:100%;margin-top:8px;}
+
+.btn-outline{
+  border:2px solid var(--green);color:var(--green);padding:8px 18px;
+  border-radius:10px;font-weight:600;transition:.2s;display:inline-block;
+}
+.btn-outline:hover{background:var(--green);color:#fff;}
+
+/* ============ HERO ============ */
+.hero{
+  text-align:center;padding:90px 6% 70px;
+  background:linear-gradient(180deg,#eaf5f0 0%,var(--bg) 100%);
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.15;color:var(--text);font-weight:800;
+}
+.hero p{max-width:620px;margin:20px auto;color:var(--muted);font-size:1.1rem;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+
+/* ============ SECTIONS ============ */
+section{padding:50px 6%;}
+section h2{font-size:1.7rem;margin-bottom:26px;}
+section h3{font-size:1.2rem;margin:24px 0 14px;}
+.page-head{padding:50px 6% 20px;}
+.page-head h1{font-size:2rem;margin-bottom:8px;}
+.page-head p{color:var(--muted);}
+
+/* ============ CARDS ============ */
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;
+}
+.card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;transition:.25s;position:relative;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(46,139,116,.12);}
+.card h3{margin-bottom:4px;font-size:1.15rem;}
+.cause{color:var(--green);font-weight:600;font-size:.9rem;margin-bottom:10px;}
+.card p{color:var(--muted);margin-bottom:16px;font-size:.95rem;}
+.badge{
+  position:absolute;top:16px;right:16px;background:var(--green-soft);color:var(--green);
+  font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:20px;
+}
+
+/* ============ FORMS ============ */
+.form-wrap{
+  max-width:460px;margin:60px auto;background:var(--white);
+  padding:36px;border-radius:var(--radius);border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.form-wrap h2{margin-bottom:20px;}
+.form{display:flex;flex-direction:column;gap:6px;}
+.form label{font-weight:600;font-size:.9rem;margin-top:10px;}
+.form input,.form select,.form textarea{
+  padding:11px 14px;border:1px solid var(--border);border-radius:10px;
+  font-size:1rem;font-family:inherit;background:#fbfdfc;outline:none;transition:.2s;
+  width:100%;
+}
+.form input:focus,.form select:focus,.form textarea:focus{
+  border-color:var(--green);background:#fff;
+  box-shadow:0 0 0 3px rgba(46,139,116,.12);
+}
+.switch{margin-top:18px;text-align:center;color:var(--muted);font-size:.9rem;}
+.switch a{color:var(--green);font-weight:600;}
+
+/* Inline form (NGO add-need) */
+.inline-form{flex-direction:row;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
+.inline-form input{flex:1;min-width:180px;width:auto;}
+
+/* ============ TABLES ============ */
+.table-wrap{
+  overflow-x:auto;background:var(--white);
+  border-radius:var(--radius);border:1px solid var(--border);
+}
+table{width:100%;border-collapse:collapse;}
+th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--border);font-size:.95rem;}
+th{background:#f2f8f5;font-weight:700;color:var(--green);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#fafdfb;}
+
+/* Status pill */
+.pill{
+  background:var(--green-soft);color:var(--green);
+  padding:3px 10px;border-radius:20px;font-size:.8rem;font-weight:600;
+  display:inline-block;
+}
+
+/* ============ NEEDS LIST ============ */
+.need-list{list-style:none;margin-bottom:26px;}
+.need-list li{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:12px 16px;margin-bottom:8px;
+}
+
+/* ============ MESSAGES ============ */
+.msg{margin-top:12px;font-weight:600;}
+.msg.ok{color:var(--green);}
+.msg.err{color:#c0392b;}
+
+.flash-wrap{padding:0 6%;margin-top:14px;}
+.flash{
+  padding:12px 16px;border-radius:10px;margin-bottom:8px;
+  font-weight:600;font-size:.92rem;
+}
+.flash-success{background:var(--green-soft);color:var(--green);}
+.flash-error{background:#fdecea;color:#c0392b;}
+
+/* ============ SEARCH ============ */
+#searchBox{
+  width:100%;max-width:420px;padding:12px 16px;
+  border:1px solid var(--border);border-radius:10px;
+  font-size:1rem;outline:none;transition:.2s;
+}
+#searchBox:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(46,139,116,.12);}
+
+/* ============ MISC ============ */
+.empty{color:var(--muted);font-style:italic;}
+
+/* ============ FOOTER ============ */
+footer{
+  text-align:center;padding:30px 6%;color:var(--muted);font-size:.9rem;
+  border-top:1px solid var(--border);margin-top:40px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:600px){
+  .navbar{flex-direction:column;gap:12px;}
+  .nav-links{flex-wrap:wrap;justify-content:center;}
+  .form-wrap{margin:30px 16px;padding:24px;}
+  .hero{padding:60px 6% 40px;}
+  .inline-form{flex-direction:column;}
+  .inline-form input{width:100%;}
+}

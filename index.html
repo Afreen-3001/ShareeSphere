@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}ShareSphere — A little kindness goes a long way{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <h1>A little kindness<br>goes a long way.</h1>
+  <p>ShareSphere connects generous donors with verified NGOs who need clothes, books, electronics, and support for people in need.</p>
+  <div class="hero-btns">
+    <a href="{{ url_for('ngo_list') }}" class="btn-solid">Browse NGOs</a>
+    <a href="{{ url_for('register') }}" class="btn-outline">Join as Donor</a>
+  </div>
+</section>
+
+<!-- VERIFIED NGOS -->
+<section class="featured">
+  <h2>Verified NGOs</h2>
+
+  <div class="card-grid">
+    {% for ngo in ngos %}
+      <div class="card">
+        <div class="badge">✓ Verified</div>
+        <h3>{{ ngo['name'] }}</h3>
+        <p class="cause">{{ ngo['cause'] }}</p>
+        <p>{{ ngo['description'] or 'Working to help those in need.' }}</p>
+        <a href="{{ url_for('donate', ngo_id=ngo['id']) }}" class="btn-solid small">Donate</a>
+      </div>
+    {% else %}
+      <p class="empty">No verified NGOs yet. Check back soon.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
